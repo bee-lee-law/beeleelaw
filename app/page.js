@@ -1,9 +1,17 @@
+'use client'
 import Image from "next/image";
 import styles from "./page.module.css";
+import Wrapper from "./components/ui/Wrapper";
+import checkMobile from "./components/tools/checkMobile";
+
+
+const pageTitle = "Index";
 
 export default function Home() {
+  var isMobile = checkMobile();
   return (
-    <div className={styles.page}>
+    <Wrapper isMobile={isMobile} pageTitle={pageTitle}>
+      {/*isMobile ? <a>isMobile {window.innerWidth}</a> : <a>not mobile {window.innerWidth}</a>*/}
       <main className={styles.main}>
         <div className={styles.logo}>testbox</div>
         <ol>
@@ -13,6 +21,6 @@ export default function Home() {
           <li>Save and see your changes instantly.</li>
         </ol>
       </main>
-    </div>
+    </Wrapper>
   );
 }

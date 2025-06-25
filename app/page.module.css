@@ -10,7 +10,7 @@
   grid-template-rows: 20px 1fr 20px;
   align-items: center;
   justify-items: center;
-  min-height: 50svh;
+  min-height: 75svh;
   padding: 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
@@ -54,6 +54,37 @@ a.primary {
 a.secondary {
   border-color: var(--gray-alpha-200);
   min-width: 158px;
+}
+
+.slideIn {
+  transform: translateX(0%);
+  transition: transform 0.25s ease-in-out;
+}
+
+.slideOutRight {
+  transform: translateX(100%);
+  transition: transform 0.25s ease-in-out;
+}
+
+.slideOutLeft {
+  transform: translateX(-100%);
+  transition: transform 0.25s ease-in-out;
+}
+
+.circledQuestion::before {
+  content: '?';
+  display: inline-block;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  border-radius: 50%;
+  margin-left: 6px;
+  padding: 0.13em 0.2em 0.09em 0.2em;
+  color: inherit;
+  border: 1px solid;
+  text-decoration: none;
 }
 
 /* Enable hover only on non-touch devices */
