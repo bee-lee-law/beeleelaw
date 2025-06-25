@@ -54,6 +54,7 @@ function NavMenuIconLeft(props){
     }
     return(
         <div style={{
+                cursor: 'pointer',
                 fontSize:'2.5em', 
                 transform: hover ? 'scale(1.3)' : 'scale(1)', 
                 marginTop: '-1.5vh',
@@ -84,6 +85,7 @@ function NavMenuIconRight(props){
     }
     return(
         <span style={{
+                cursor: 'pointer',
                 fontSize:'2.5em', 
                 transform: hover ? 'scale(1.3)' : 'scale(1)', 
                 marginTop: '-1.5vh',

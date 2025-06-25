@@ -1,6 +1,9 @@
 :root {
   --foreground: #ffffff;
   --background: #222222;
+  --bs-card-height: 10px;
+  --offblack: #333333;
+  --offwhite: #dddddd;
 }
 
 html,
@@ -26,4 +29,23 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.card {
+  font-family: var(--font-geist-sans);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 95%;
+  border: 1px solid var(--offblack);
+  border-radius: 1em;
+  padding: 1em;
+  overflow: hidden;
+  max-height: 10em;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.card.minimized {
+  max-height: 0.4em;
 }

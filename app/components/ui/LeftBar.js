@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 const style = {
     position: 'absolute',
+    zIndex: '10',
     borderRight: '1px solid',
     borderTop: '1px solid',
     background: '#222222',

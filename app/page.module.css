@@ -21,6 +21,7 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+
 }
 
 .main ol {
@@ -54,6 +55,44 @@ a.primary {
 a.secondary {
   border-color: var(--gray-alpha-200);
   min-width: 158px;
+}
+
+.card {
+  font-family: var(--font-geist-sans);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 95%;
+  border: 1px solid var(--offblack);
+  border-radius: 1em;
+  padding: 1em;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.minimized {
+  font-family: var(--font-geist-sans);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 95%;
+  border: 1px solid var(--offblack);
+  border-radius: 1em;
+  padding: 1em;
+  overflow: hidden;
+  max-height: 1em;
+}
+
+.cardHeader {
+  font-family: var(--font-geist-mono);
+  border-bottom: 1px solid var(--offblack);
+  width: 100%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.25em;
+  margin-bottom: 0.5em;
 }
 
 .slideIn {

@@ -3,7 +3,8 @@ import styles from "/app/page.module.css";
 import { useState } from 'react';
 
 const style = {
-    position: 'absolute',
+    position: 'fixed',
+    zIndex: '10',
     right: '0',
     borderLeft: '1px solid',
     borderTop: '1px solid',
