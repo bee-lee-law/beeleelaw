@@ -11,8 +11,9 @@ import BottomBar from "./BottomBar";
  * @component
  * @param {boolean} isMobile - true if page is viewed from mobile device, else false
  * @param {string} pageTitle - Title of given page.
+ * @param {JSX.Element[]} pageDescription - Array of JSX.Elements describing the project of the given page
 */
-export default function Wrapper({ children, isMobile, pageTitle}){
+export default function Wrapper({ children, isMobile, pageTitle, pageDescription}){
     const [navStatus, setNavStatus] = useState({
         left: false,
         right: false,
@@ -21,7 +22,7 @@ export default function Wrapper({ children, isMobile, pageTitle}){
         <span style={{overflowX: 'hidden', position: isMobile ? 'relative' : 'inherit'}}>
             <TopBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageTitle={pageTitle} />
             <LeftBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} />
-            <RightBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} />
+            <RightBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageDescription={pageDescription} />
             <div className={styles.page}>
                 {children}
             </div>

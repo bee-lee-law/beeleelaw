@@ -13,7 +13,7 @@ const style = {
 const innerStyle = {
     width: '95%',
     margin: 'auto',
-    marginTop: '3vh',
+    marginTop: '2vh',
     display: 'flex',
     flexFlow: 'row',
     justifyContent: 'space-between',

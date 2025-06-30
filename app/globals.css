@@ -33,6 +33,7 @@ a {
 
 .card {
   font-family: var(--font-geist-sans);
+  line-height: 1.5em;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -42,8 +43,8 @@ a {
   border-radius: 1em;
   padding: 1em;
   overflow: hidden;
-  max-height: 10em;
-  transition: max-height 0.2s ease-in-out;
+  max-height: 100em;
+  transition: max-height 0.3s ease-in-out;
 }
 
 .card.minimized {

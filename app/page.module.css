@@ -57,33 +57,7 @@ a.secondary {
   min-width: 158px;
 }
 
-.card {
-  font-family: var(--font-geist-sans);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  max-width: 95%;
-  border: 1px solid var(--offblack);
-  border-radius: 1em;
-  padding: 1em;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-}
 
-.minimized {
-  font-family: var(--font-geist-sans);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  max-width: 95%;
-  border: 1px solid var(--offblack);
-  border-radius: 1em;
-  padding: 1em;
-  overflow: hidden;
-  max-height: 1em;
-}
 
 .cardHeader {
   font-family: var(--font-geist-mono);
@@ -125,6 +99,30 @@ a.secondary {
   border: 1px solid;
   text-decoration: none;
 }
+
+
+.innerCardDeskop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 3em
+}
+
+.innerCardMobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 3em
+}
+
+.cardContentDesktop {
+  width: 100%;
+}
+
+.cardContentMobile {
+  width: 100%;
+}
+
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

@@ -37,10 +37,10 @@ const testData = [
  * @param {object} navStatus - Status of navigation bars, from Wrapper.js. Keys: left, right
  * @param {function} setNavStatus - Function to change navigation bar status, from Wrapper.js.
  * @param {boolean} isMobile - true if page is viewed from mobile device, else false
- * @param {array} projectDetails - Array of strings describing the project of the given page
+ * @param {JSX.Element[]} pageDescription - Array of JSX.Elements describing the project of the given page
 */
 export default function RightBar(props){
-    var projectDetails = props.projectDetails ? props.projectDetails : testData;
+    var pageDescription = props.pageDescription ? props.pageDescription : testData;
     let handleMouseEnter = () => {
         props.setNavStatus({
             ...props.navStatus,
@@ -60,7 +60,7 @@ export default function RightBar(props){
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
-            {projectDetails.map((data, index)=>{
+            {pageDescription.map((data, index)=>{
                 return(
                     <div style={liStyle} key={index}>{data}</div>
                 )

@@ -2,7 +2,7 @@
 import styles from "/app/page.module.css"
 import { useState } from 'react';
 import Image from "next/image";
-import chevron from '/public/chevron.svg';
+import chevron from '/public/icons/chevron.svg';
 
 const titleStyle = {
     fontSize: '1.2em',
@@ -15,13 +15,14 @@ const contentStyle = {
 
 /** Card - Modular display of information
  * @component
- * @param {string} headerTitle - Title of card
- * @param {string} headerContent - Content of header
+ * @param {string} headerTitle - Title of card.
+ * @param {string} headerContent - Content of header.
+ * @param {boolean} minimizeable - Provide the option to minimize the card.
  * */
 export default function Card({ children, headerTitle, headerContent, minimizeable, style}){
     const [max, setMax] = useState(true);
     return(
-        <div className={max ? 'card' : 'card minimized'} style={{...style}}>
+        <div className={`card ${max ? '' : 'minimized'}`} style={{...style}}>
             <MinimizeButton minimizeable={minimizeable} max={max} setMax={setMax} />
             {headerTitle ? 
                 <div className={styles.cardHeader}>
@@ -29,8 +30,8 @@ export default function Card({ children, headerTitle, headerContent, minimizeabl
                     <div>{headerContent}</div>
                 </div>
              : <></>}
-             <div>
-                {max ? children : <></>}
+             <div style={{opacity: max ? '100%' : '0%'}}>
+                {children}
              </div>
         </div>
     )

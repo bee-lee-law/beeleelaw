@@ -2,9 +2,9 @@
 import styles from "/app/page.module.css";
 import { useState } from "react";
 import Image from "next/image";
-import githubMark from '/public/github-mark.svg';
-import linkedInMark from '/public/InBug-White.png';
-import instaMark from '/public/Instagram_Glyph_Black.svg';
+import githubMark from '/public/icons/github-mark.svg';
+import linkedInMark from '/public/icons/InBug-White.png';
+import instaMark from '/public/icons/Instagram_Glyph_Black.svg';
 
 
 const style = {
