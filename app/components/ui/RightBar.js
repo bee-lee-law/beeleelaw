@@ -1,6 +1,7 @@
 'use client'
 import styles from "/app/page.module.css";
 import { useState } from 'react';
+import Card from "./Card";
 
 const style = {
     position: 'fixed',
@@ -60,6 +61,7 @@ export default function RightBar(props){
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
+            <div className={styles.cardHeader} style={{width: '100%', height: '1.2em', background: '#333333', textAlign: 'center', fontSize: '2em'}}>About</div>
             {pageDescription.map((data, index)=>{
                 return(
                     <div style={liStyle} key={index}>{data}</div>

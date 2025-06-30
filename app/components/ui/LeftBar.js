@@ -1,6 +1,7 @@
 'use client'
 import styles from "/app/page.module.css";
 import { useState } from 'react';
+import Link from 'next/link'
 
 const style = {
     position: 'absolute',
@@ -30,6 +31,7 @@ const liStyle = {
  * @param {object} navStatus - Status of navigation bars, from Wrapper.js. Keys: left, right
  * @param {function} setNavStatus - Function to change navigation bar status, from Wrapper.js.
  * @param {boolean} isMobile - true if page is viewed from mobile device, else false
+ * @param {Object[]} directory - Array of Objects in format: {route: routePath, name: URL Name}
 */
 export default function LeftBar(props){
     let handleMouseEnter = () => {
@@ -51,9 +53,12 @@ export default function LeftBar(props){
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
-            <div style={liStyle}>TestSite 1</div>
-            <div style={liStyle}>TestSite 2</div>
-            <div style={liStyle}>TestSite 3</div>
+            <Link href={'/'}><div style={liStyle}>Home</div></Link>
+            {props.directory.map((obj, ind)=>{
+                return(
+                    <Link href={obj.route}><div style={liStyle} key={ind}>{obj.name}</div></Link>
+                )
+            })}
         </div>
     )
 }

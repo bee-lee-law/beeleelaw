@@ -6,6 +6,9 @@ import { useState } from 'react';
 import RightBar from "./RightBar";
 import BottomBar from "./BottomBar";
 
+const DIRECTORY = [
+    {'route': '/personalSummary', 'name': 'Personal Summary'},
+  ]
 
 /** Page Wrapper - Wrap the page in header/footer/nav bars
  * @component
@@ -21,7 +24,7 @@ export default function Wrapper({ children, isMobile, pageTitle, pageDescription
     return (
         <span style={{overflowX: 'hidden', position: isMobile ? 'relative' : 'inherit'}}>
             <TopBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageTitle={pageTitle} />
-            <LeftBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} />
+            <LeftBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} directory={DIRECTORY} />
             <RightBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageDescription={pageDescription} />
             <div className={styles.page}>
                 {children}
