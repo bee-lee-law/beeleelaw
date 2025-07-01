@@ -31,7 +31,7 @@ export default function TopBar(props){
         <div style={style}>
             <div style={innerStyle}>
                 <NavMenuIconLeft navStatus={props.navStatus} setNavStatus={props.setNavStatus} isMobile={props.isMobile} />
-                {props.pageTitle ? <div style={{fontSize: '2.5em'}}>{props.pageTitle}</div> : <div></div>}
+                {props.pageTitle ? <div style={{fontSize: '2em'}}>{props.pageTitle}</div> : <div></div>}
                 <NavMenuIconRight navStatus={props.navStatus} setNavStatus={props.setNavStatus} isMobile={props.isMobile} />
             </div>
         </div>

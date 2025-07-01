@@ -16,11 +16,13 @@ const style = {
     flexDirection: "column",
     gap: '2vh',
     marginTop: '10vh',
-    marginLeft: '-0.8vh'
+    marginLeft: '-0.8vh',
+    overflow: 'hidden',
 }
 
 const liStyle = {
-    marginTop: '4vh',
+    paddingTop: '1em',
+    paddingLeft: '1em',
     background: '#333333',
     width: '100%',
     height: '5vh'
@@ -56,7 +58,7 @@ export default function LeftBar(props){
             <Link href={'/'}><div style={liStyle}>Home</div></Link>
             {props.directory.map((obj, ind)=>{
                 return(
-                    <Link href={obj.route}><div style={liStyle} key={ind}>{obj.name}</div></Link>
+                    <Link href={obj.route} key={ind}><div style={{...liStyle, maxWidth: props.isMobile ? '100%' : '15vw'}}> {obj.name}</div></Link>
                 )
             })}
         </div>
