@@ -7,7 +7,14 @@ import RightBar from "./RightBar";
 import BottomBar from "./BottomBar";
 
 const DIRECTORY = [
-    {'route': '/personalSummary', 'name': 'Personal Summary'},
+    {
+        'route': '/personalSummary', 
+        'name': 'Personal Summary'
+    },    
+    {
+        'route': '/jsonTable', 
+        'name': 'JSON Table'
+    },
   ]
 
 /** Page Wrapper - Wrap the page in header/footer/nav bars

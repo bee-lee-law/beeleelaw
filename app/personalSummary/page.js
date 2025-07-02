@@ -38,7 +38,7 @@ export default function Home() {
 function PersonalLife(props){
     const headerTitle=`Personal Life`;
     const headerContent=`Want to know if we'd get along? Or how I would fit in your work culture? Let me tell you a little bit about myself`;
-    const body1 = `I was born in 1986 and grew up in the Detroit area. I moved around many times, but most of my time was spent in East Michigan, Tampa FL, Chicago IL, and Grand Rapids MI.
+    const body1 = `I grew up in the Detroit area. I moved around many times, but most of my time was spent in East Michigan, Tampa FL, Chicago IL, and Grand Rapids MI.
                   After high school, I moved to Tampa with some friends. Here, I worked as a lifeguard while starting community college. After finishing my Associate's degree, I started
                   studying Mathematics at the University of South Florida while discovering my talents as a baker and bakery manager. After a long time spent in Tampa, I moved to Chicago. I was there
                   for less than 1 year before COVID hit and decided to move to Grand Rapids.`;
