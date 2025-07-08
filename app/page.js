@@ -41,13 +41,16 @@ export default function Home() {
           <span className={isMobile ? styles.cardContentMobile : styles.cardContentDesktop}>
             My name is Brandon Lawrence; welcome to the home page of my showcase project. You can find the repository for the page in the github link at the bottom, as well as links to my LinkedIn and Instagram.
             The hamburger icon in the top left of the page will open a navigation menu, while the help icon in the top right will show a brief description of the page, including the tools used to build it.
-            The intent of this project is to provide information about myself and host a kind of portfolio. My goals include:
+            The intent of this project is to provide information about myself and host a kind of portfolio. While I have no issues with using
+            AI or LLMs as a tool, I'll avoid using them here as this is a space to show my skills and projects.
+            My goals include:
             <ul>
               <li>Show off who I am</li>
               <li>Showcase front-end development and React skills by creating a web-app that looks visually cohesive on mobile and desktop</li>
               <li>Utilize Amazon Web Services to get hands-on practice with the cloud while studying for AWS certifications</li>
               <li>Use my data and development skills to create some interactive tools</li>
               <li>Host my personal projects</li>
+              
             </ul>
           </span>
 
