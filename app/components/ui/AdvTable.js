@@ -1,8 +1,9 @@
 'use client'
 import styles from "/app/page.module.css"
 import { useState } from 'react';
+import Card from "./Card";
 
-/*
+
 const sampleData = [
 	{
 		  "id": 12345,
@@ -63,9 +64,9 @@ const sampleData = [
 		  "date": "4/24/2024"
 	}
 ]
-*/
 
-const sampleData = 'hi';
+
+//const sampleData = 'hi';
 
 /** AdvTable - A Table for JSON/NoSQL data. Scan data to determine column names and data types. Allow options for filtering(not yet), sorting(not yet), pagination(not yet)
  * @component
@@ -74,6 +75,7 @@ const sampleData = 'hi';
 export default function AdvTable(props){
     let data = props.data ? props.data : sampleData;
     let schema = dataScan(data);
+    console.log(schema);
 
     if(schema.error){
         return(
@@ -171,11 +173,56 @@ function validateTable(inData){
 function dataScan(inData){
     const maxScan = 10000;
     let out = {"columns": [], "error": false};
+    let dataScanError = '';
+    let columnObj = {};
+
+    let iterateRows = (inData) => {
+        for(let i=0; i<inData.length; i++){
+            if(dataScanError){break;}
+            let row = sampleData[i];
+            try{
+                iterateColumns(row);
+            }catch(e){
+                dataScanError += `Error iterating column row ${i}; ${row}\n${e}\n`
+                break;
+            }
+        }
+    }
+    let iterateColumns = (inRow) => {
+        let columns = Object.keys(inRow);
+        for(let i=0; i<columns.length; i++){
+            let column = columns[i];
+            let data = inRow[column];
+            let dataType = columnObj[column] ? columnObj[column] : 'table';
+            columnObj[column] = dataTypeCheck(data, dataType);
+        }
+    }
 
     let validate = validateTable(inData);
     if(validate.error){return {...out, "error": validate.error}}
 
     let sampleData = inData.length > maxScan ? getRandomSample(inData) : inData;
+
+    try{
+        iterateRows(sampleData);
+    }catch(e){
+        dataScanError += `Error iterating rows;\n${e}\n`
+    }
+
+    if(dataScanError){
+        out.error = dataScanError;
+        return out;
+    }
+    console.log(columnObj);
+    let columns = Object.keys(columnObj);
+    for(let i=0; i<columns.length; i++){
+        let column = String(columns[i]);
+        let dataType = columnObj[column];
+        let obj = {[column]: dataType}
+        out.columns.push(obj);
+    }
+
+    return out;
 }
 
 /** dataTypeCheck - Check piece of data against a given type. Return an estimated data type. Follow a heirarchy of most to least restrictive data types: table, boolean, int, number, date, string
@@ -189,8 +236,9 @@ function dataTypeCheck(inDatum, datumType){
     if(datumType === 'string'){return datumType;}
     if(datumType === 'date'){
         try{
-            new Date(inDatum);
-            return 'date';
+            let test = new Date(inDatum);
+            if(test instanceof Date && !isNaN(test)){return 'date';}
+            else{return 'string'}
         }
         catch(e){
             return 'string';
@@ -199,7 +247,9 @@ function dataTypeCheck(inDatum, datumType){
     if(datumType === 'number'){
         try{
             let check = Number(inDatum);
-            return 'number';
+            if(!Number.isNaN(check)){return 'number';}
+            else{return dataTypeCheck(inDatum, 'date')}
+            
         }
         catch(e){
             return dataTypeCheck(inDatum, 'date');
@@ -209,7 +259,7 @@ function dataTypeCheck(inDatum, datumType){
         try{
             let test = Number(inDatum);
             if(Number.isInteger(inDatum)){return 'int';}
-            else{return test;}
+            else{return dataTypeCheck(inDatum, 'number');}
         }catch(e){
             return dataTypeCheck(inDatum, 'date');
         }
