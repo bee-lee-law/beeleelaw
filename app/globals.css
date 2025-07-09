@@ -4,6 +4,7 @@
   --bs-card-height: 10px;
   --offblack: #333333;
   --offwhite: #dddddd;
+  --offblack2: #444444;
 }
 
 html,
@@ -49,4 +50,28 @@ a {
 
 .card.minimized {
   max-height: 0.5em;
+}
+
+.advTable table {
+  border-collapse: collapse;
+}
+
+.advTable thead th{
+  font-family: var(--font-geist-mono);
+  font-weight: bold;
+  border: 1px solid var(--offblack);
+  text-align: center;
+}
+
+.advTable tbody tr td {
+  padding-left: 0.2em;
+  overflow: hidden;
+}
+
+.advTable tbody tr:nth-last-child(odd) {
+  background:var(--offblack);
+}
+
+.advTable tbody tr:nth-last-child(even) {
+  background:var(--offblack2);
 }

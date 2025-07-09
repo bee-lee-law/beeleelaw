@@ -3,6 +3,23 @@ import styles from "/app/page.module.css"
 import { useState } from 'react';
 import Card from "./Card";
 
+const testTable = [
+    {
+        "PID": 1234,
+        "name": "reggy",
+        "count": 2
+    },
+    {
+        "PID": 2345,
+        "name": "dim",
+        "count": 6
+    },
+    {
+        "PID": 1235,
+        "name": "val",
+        "count": 1
+    }
+]
 
 const sampleData = [
 	{
@@ -62,6 +79,12 @@ const sampleData = [
 		  "id": 1212,
 		  "name": "Dupe Checker",
 		  "date": "4/24/2024"
+	},
+	{
+		  "id": 22421,
+		  "name": "Table Checker",
+		  "date": "4/24/2024",
+          "Test Table": testTable
 	}
 ]
 
@@ -74,8 +97,11 @@ const sampleData = [
 */
 export default function AdvTable(props){
     let data = props.data ? props.data : sampleData;
+    const [activeData, setActiveData] = useState(data.slice());
     let schema = dataScan(data);
-    console.log(schema);
+    let columnList = Object.keys(schema.columns);
+    console.log('col list length: ' + columnList.length)
+    const maxWidth = Math.floor(100/(columnList.length)) + 'vw';
 
     if(schema.error){
         return(
@@ -83,20 +109,35 @@ export default function AdvTable(props){
         )
     }
     return (
-        <Card>
-            <Table />
-        </Card>
+        <Table schema={schema} columnList={columnList} activeData={activeData} setActiveData={setActiveData} maxWidth={maxWidth} />
     );
 };
 
 function Table(props){
     return(
-        <table>
+        <table className='advTable' style={{border: '1px solid #333333'}} cellSpacing={0}>
             <thead>
-
+                <tr>
+                    {
+                        Object.keys(props.schema.columns).map((col, key)=>{
+                            let colName = col;
+                            let colType = col[colName];
+                            console.log(colName + ' ' + colType)
+                            return(
+                                <HeaderCell colName={colName} colType={colType} key={key} maxWidth={props.maxWidth} />
+                            )
+                        })
+                    }
+                </tr>
             </thead>
             <tbody>
-
+                    {
+                        props.activeData.map((row, key)=>{
+                            return(
+                                <Row schema={props.schema} columnList={props.columnList} row={row} key={key} maxWidth={props.maxWidth} />
+                            )
+                        })
+                    }
             </tbody>
         </table>
     )
@@ -105,16 +146,47 @@ function Table(props){
 function Row(props){
     return(
         <tr>
-        
+            {
+                props.columnList.map((col, key)=>{
+                    return(
+                        <Cell data={props.row[col] ? props.row[col] : null} key={key} schema={props.schema} col={col} maxWidth={props.maxWidth} />
+                    )
+                })
+            }
         </tr>
     );
 }
 
 function Cell(props){
-    return(
-        <td>
+    if(!props.data){
+        return(<td style={{maxWidth: props.maxWidth}}></td>)
+    }
+    let data = props.data;
 
+    if(props.data && props.schema.columns[props.col] == 'table'){
+        data = <AdvTable data={props.data} />
+    }
+    else if(isObject(data)){
+        data = JSON.stringify(data);
+    }
+    else{
+        data = String(data);
+    }
+    return(
+        <td style={{maxWidth: props.maxWidth}}>
+            {data}
         </td>
+    )
+}
+
+function HeaderCell(props){
+
+    return(
+        <th className='advTable' style={{maxWidth: props.maxWidth}} >
+            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+           <span>{true ? <>&#10728;</> : <>&#9710;</>}</span> <span style={{cursor: 'pointer'}}> {props.colName} </span> <span style={{cursor: 'pointer'}}>&#10983;</span>
+           </div>
+        </th>
     )
 }
 
@@ -214,6 +286,8 @@ function dataScan(inData){
         return out;
     }
     console.log(columnObj);
+
+    /*
     let columns = Object.keys(columnObj);
     for(let i=0; i<columns.length; i++){
         let column = String(columns[i]);
@@ -221,7 +295,8 @@ function dataScan(inData){
         let obj = {[column]: dataType}
         out.columns.push(obj);
     }
-
+    */
+    out.columns = columnObj;
     return out;
 }
 
