@@ -24,8 +24,8 @@ export default function Home() {
   return (
     <Wrapper isMobile={isMobile} pageTitle={pageTitle} pageDescription={pageDescription}>
       <main className={styles.main}>
-        <Card style={{width: '80vw'}}>
-            <AdvTable />
+        <Card style={{width: '80vw', overflow: 'visible'}}>
+            <AdvTable pagination={true} />
         </Card>
       </main>
     </Wrapper>
