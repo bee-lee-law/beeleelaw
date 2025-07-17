@@ -3,94 +3,6 @@ import styles from "/app/page.module.css"
 import { useState, useEffect } from 'react';
 import Card from "./Card";
 
-const testTable = [
-    {
-        "PID": 1234,
-        "name": "reggy",
-        "count": 2
-    },
-    {
-        "PID": 2345,
-        "name": "dim",
-        "count": 6
-    },
-    {
-        "PID": 1235,
-        "name": "val",
-        "count": 1
-    }
-]
-
-const sampleData = [
-	{
-		  "id": 12345,
-		  "name": "John Doe",
-		  "email": "john.doe@example.com",
-		  "address": {
-			"street": "123 Main St",
-			"city": "Anytown",
-			"zip": "12345"
-		  },
-		  "hobbies": ["reading", "hiking"],
-		  "date": "7/1/2025"
-	},
-	{
-		  "id": 2342,
-		  "name": "Razzle Bin",
-		  "address": {
-			"street": "28 Crosbin",
-			"city": "Rislow",
-			"zip": "42442",
-			"state": "MI"
-		  },
-		  "date": "1/12/2025"
-	},
-	{
-		  "id": 78966,
-		  "name": "Fintelin Robrinsla",
-		  "date": "4/24/2024"
-	},
-	{
-		  "id": 5454,
-		  "name": "Gabe",
-		  "date": "3/3/2024"
-	},
-	{
-		  "id": 1221,
-		  "name": "Tinlow Freker",
-		  "date": "4/6/2023"
-	},
-	{
-		  "id": 3311,
-		  "name": "Mick Mock",
-		  "date": "1/1/2024"
-	},
-	{
-		  "id": 2588,
-		  "name": "Bornin Valley",
-		  "date": "4/24/2024"
-	},
-	{
-		  "id": 1212,
-		  "name": "Dupe Checker",
-		  "date": "4/24/2024"
-	},
-	{
-		  "id": 1212,
-		  "name": "Dupe Checker",
-		  "date": "4/24/2024"
-	},
-	{
-		  "id": 22421,
-		  "name": "Table Checker",
-		  "date": "4/24/2024",
-          "Test Table": testTable
-	}
-]
-
-
-//const sampleData = 'hi';
-
 /** AdvTable - A Table for JSON/NoSQL data. Scan data to determine column names and data types. Allow options for filtering(not yet), sorting(not yet), pagination(not yet)
  * @component
  * @param {Array} data - Data to attempt to display in a table
@@ -120,7 +32,6 @@ export default function AdvTable(props){
                 return Number(datum);
             }
             if(datum && type === 'string'){
-                console.log('tolower');
                 return String(datum).toLowerCase();
             }
             return datum ? datum : "";
@@ -204,9 +115,8 @@ function Table(props){
     // Output record range based on pagination options
         return {min: (page*pageSize)-pageSize, max: page*pageSize}
     }
-    console.log(pageRange(props.page, props.pageSize).min)
     return(
-        <table className='advTable' style={{border: '1px solid #333333', width: '99%'}} cellSpacing={0}>
+        <table className='advTable' style={{border: '1px solid #333333', width: '99%',}} cellSpacing={0}>
             <thead>
                 <tr>
                     {

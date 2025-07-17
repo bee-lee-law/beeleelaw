@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Card from "./Card";
 
 const style = {
-    position: 'fixed',
+    position: 'absolute',
     zIndex: '10',
     right: '0',
     borderLeft: '1px solid',

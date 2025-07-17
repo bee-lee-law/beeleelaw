@@ -43,7 +43,7 @@ a {
   border: 1px solid var(--offblack);
   border-radius: 1em;
   padding: 1em;
-  overflow: hidden;
+  overflow-x: 'scroll';
   max-height: 500em;
   transition: max-height 0.3s ease-in-out;
 }
