@@ -94,6 +94,8 @@ const sampleData = [
 /** AdvTable - A Table for JSON/NoSQL data. Scan data to determine column names and data types. Allow options for filtering(not yet), sorting(not yet), pagination(not yet)
  * @component
  * @param {Array} data - Data to attempt to display in a table
+ * @param {boolean} pagination - Allow/deny pagination of data
+ * @param {int} pageSize - Page size when pagination is allowed, default 250
 */
 export default function AdvTable(props){
     let data = props.data ? props.data.slice() : sampleData.slice();
@@ -105,7 +107,7 @@ export default function AdvTable(props){
     const [toRoll, setToRoll] = useState(false);
     const [sort, setSort] = useState();
     const [page, setPage] = useState(1);
-    const pageSize = 250;
+    const pageSize = props.pageSize ? props.pageSize : 250;
 
     const rollFilters = () => {
         let newData = data.slice();
@@ -117,11 +119,11 @@ export default function AdvTable(props){
             if(type === 'int' || type === 'number'){
                 return Number(datum);
             }
-            if(type === 'string'){
+            if(datum && type === 'string'){
                 console.log('tolower');
-                return datum.toLowerCase();
+                return String(datum).toLowerCase();
             }
-            return datum ? datum.toLowerCase() : "";
+            return datum ? datum : "";
         }
         for (var col in filters){
             let type = schema.columns[col];
@@ -163,8 +165,8 @@ export default function AdvTable(props){
             mod = -1;
         }
         setActiveData(activeData.sort((a, b)=>{
-            if(a[sorter] < b[sorter]){return 1*mod;}
-            if(a[sorter] > b[sorter]){return -1*mod;}
+            if(a[sorter] < b[sorter] || !b[sorter]){return 1*mod;}
+            if(a[sorter] > b[sorter] || !a[sorter]){return -1*mod;}
             return 0;
         }))
     }
@@ -370,13 +372,22 @@ function FilterBox(props){
         setOpen(false);
         props.setToRoll(true);
     }
+    let handleKeyDown = (e) => {
+        if(e.key == 'Enter'){
+            handleSubmit(e);
+        }
+        if(e.key == 'Escape'){
+            setOpen(false);
+        }
+    }
+
     const boxStyle = {
         width: '25%',
         height: 'auto',
         overflow: 'visible',
-        background: 'white',
+        background: '#dddddd',
         color: 'black',
-        border: '1px solid red',
+        border: '1px solid black',
         position: 'absolute',
         display: 'flex', 
         flexFlow: 'column', 
@@ -399,7 +410,7 @@ function FilterBox(props){
                 <div style={boxStyle}>
                     {props.colName}
                     <div style={innerBoxStyle}>
-                        <select onChange={handleOpChange}>
+                        <select onChange={handleOpChange} value={filter.op} >
                             {Object.keys(filterMap).map((f, ind)=>{
                             return(
                                 <option key={ind} value={f}>{filterMap[f]}</option>
@@ -409,7 +420,7 @@ function FilterBox(props){
                         <input 
                         style={{width: '65%', height: '100%'}}
                         type={type}
-                        //onKeyDown={handleKeyDown}
+                        onKeyDown={handleKeyDown}
                         onChange={handleChange}
                         value={filter.val}
                         />
