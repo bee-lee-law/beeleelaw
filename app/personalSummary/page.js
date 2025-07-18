@@ -92,9 +92,7 @@ function Education(props){
     return(
         <Card style={{width: '80vw'}} minimizeable={true} headerTitle={headerTitle} headerContent={headerContent}>
             <div className={props.isMobile ? styles.innerCardMobile : styles.innerCardDeskop}>
-                <span className={props.isMobile ? styles.cardContentMobile : styles.cardContentDesktop}>
-                    <div>A link to my Resume is coming soon!</div>
-                    <br/>
+                <span className={props.isMobile ? styles.cardContentMobile : styles.cardContentDesktop}>                    <br/>
                     <div style={{display: 'flex', flexFlow: 'row wrap', gap: '1em'}}>
                     <Card headerTitle={"Hilssborough Community College"} headerContent={"Associates, Liberal Arts"} style={{width: props.isMobile ? '100%' : '40%'}}>
                       <div>
@@ -125,11 +123,11 @@ function Education(props){
                     </Card>
                     <Card headerTitle={"Amazon"} headerContent={"AWS Certified Cloud Practitioner"} style={{width: props.isMobile ? '100%' : '40%'}}>
                       <div>
-                        2025 - present
+                        2025 - 2028
                       </div>
                       <br/>
                       <div>
-                        Currently studying to pursue AWS Cloud certifications, and using the knowledge to host this web-app.
+                        Certified as an AWS Cloud Practitioner. More certifications on the way!
                       </div>
                     </Card>
                     </div>
@@ -152,7 +150,6 @@ function WorkHistory(props){
         <Card style={{width: '80vw'}} minimizeable={true} headerTitle={headerTitle} headerContent={headerContent}>
             <div className={props.isMobile ? styles.innerCardMobile : styles.innerCardDeskop}>
             <span className={props.isMobile ? styles.cardContentMobile : styles.cardContentDesktop}>
-            <div>A link to my Resume is coming soon!</div>
             <div>
             Throughout my formal and self-taught education, I ambitiously worked as a full
             time baker, customer support, and as a manager. I developed my professional
