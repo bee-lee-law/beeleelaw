@@ -39,19 +39,29 @@ export default function Card({ children, headerTitle, headerContent, minimizeabl
 
 function MinimizeButton(props){
     if(!props.minimizeable){return;}
+    const [touch, setTouch] = useState(false);
     const buttonStyle = {
         cursor: 'pointer',
         position: 'absolute',
         left: '0.25em',
         top: '0.25em',
+        WebkitTapHighlightColor: 'transparent',
+        transform: touch ? 'scale(1.1)' : 'scale(1)',
+        transition: 'transform 0.15s ease',
     }
     let handleClick = () => {
         props.setMax(!props.max)
     }
+    let handleTouchStart = () => {
+        setTouch(true);
+    }
+    let handleTouchEnd = () => {
+        setTouch(false);
+    }
     return(
-        <div style={buttonStyle} onClick={handleClick}>
+        <div style={buttonStyle} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             <Image
-             src={chevron} 
+             src={chevron}
              width={20}
              height={20}
              alt={'chevron'}

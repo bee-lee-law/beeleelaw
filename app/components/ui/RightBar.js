@@ -12,15 +12,17 @@ const style = {
     background: '#222222',
     borderColor: '#333333',
     width: '50vw',
-    minHeight: '100vh',
-    height: 'auto',
+    height: 'calc(100vh - 10vh)',
+    maxHeight: 'calc(100vh - 10vh)',
+    minHeight: '-webkit-fill-available',
     display: "flex",
     flexDirection: "column",
     gap: '2vh',
     marginTop: '10vh',
     marginRight: '-0.8vh',
-    overflowY: 'scroll',
-    overflowX: 'hidden'
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    WebkitOverflowScrolling: 'touch'
 }
 
 const liStyle = {

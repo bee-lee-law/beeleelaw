@@ -40,11 +40,18 @@ export default function TopBar(props){
 
 function NavMenuIconLeft(props){
     const [hover, setHover] = useState(false);
+    const [touch, setTouch] = useState(false);
     let handleMouseEnter = () => {
         setHover(true);
     }
     let handleMouseLeave = () => {
         setHover(false);
+    }
+    let handleTouchStart = () => {
+        setTouch(true);
+    }
+    let handleTouchEnd = () => {
+        setTouch(false);
     }
     let handleClick = () => {
         props.setNavStatus({
@@ -55,13 +62,17 @@ function NavMenuIconLeft(props){
     return(
         <div style={{
                 cursor: 'pointer',
-                fontSize:'2.5em', 
-                transform: hover ? 'scale(1.3)' : 'scale(1)', 
+                fontSize:'2.5em',
+                transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
                 marginTop: '-1.5vh',
                 userSelect: 'none',
+                transition: 'transform 0.2s ease',
+                WebkitTapHighlightColor: 'transparent',
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             onClick={handleClick}
         >
             &#9776;
@@ -71,11 +82,18 @@ function NavMenuIconLeft(props){
 
 function NavMenuIconRight(props){
     const [hover, setHover] = useState(false);
+    const [touch, setTouch] = useState(false);
     let handleMouseEnter = () => {
         setHover(true);
     }
     let handleMouseLeave = () => {
         setHover(false);
+    }
+    let handleTouchStart = () => {
+        setTouch(true);
+    }
+    let handleTouchEnd = () => {
+        setTouch(false);
     }
     let handleClick = () => {
         props.setNavStatus({
@@ -86,13 +104,17 @@ function NavMenuIconRight(props){
     return(
         <span style={{
                 cursor: 'pointer',
-                fontSize:'2.5em', 
-                transform: hover ? 'scale(1.3)' : 'scale(1)', 
+                fontSize:'2.5em',
+                transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
                 marginTop: '-1.5vh',
                 userSelect: 'none',
+                transition: 'transform 0.2s ease',
+                WebkitTapHighlightColor: 'transparent',
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             onClick={handleClick}
             className={styles.circledQuestion}
         />

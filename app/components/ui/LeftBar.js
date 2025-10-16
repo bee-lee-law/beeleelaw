@@ -11,7 +11,8 @@ const style = {
     background: '#222222',
     borderColor: '#333333',
     width: '15vw',
-    height: '100vh',
+    height: 'calc(100vh - 10vh)',
+    minHeight: '-webkit-fill-available',
     display: "flex",
     flexDirection: "column",
     gap: '2vh',
@@ -55,10 +56,10 @@ export default function LeftBar(props){
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
-            <Link href={'/'}><div style={liStyle}>Home</div></Link>
+            <Link href={'/'} style={{WebkitTapHighlightColor: 'transparent'}}><div style={liStyle}>Home</div></Link>
             {props.directory.map((obj, ind)=>{
                 return(
-                    <Link href={obj.route} key={ind}><div style={{...liStyle, maxWidth: props.isMobile ? '100%' : '15vw'}}> {obj.name}</div></Link>
+                    <Link href={obj.route} key={ind} style={{WebkitTapHighlightColor: 'transparent'}}><div style={{...liStyle, maxWidth: props.isMobile ? '100%' : '15vw'}}> {obj.name}</div></Link>
                 )
             })}
         </div>
