@@ -4,25 +4,23 @@ import { useState } from 'react';
 import Card from "./Card";
 
 const style = {
-    position: 'absolute',
-    zIndex: '10',
-    right: '0',
+    position: 'fixed',
+    top: '10vh',
+    right: 0,
+    zIndex: 150,
     borderLeft: '1px solid',
-    borderTop: '1px solid',
     background: '#222222',
     borderColor: '#333333',
     width: '50vw',
     height: 'calc(100vh - 10vh)',
     maxHeight: 'calc(100vh - 10vh)',
-    minHeight: '-webkit-fill-available',
     display: "flex",
     flexDirection: "column",
     gap: '2vh',
-    marginTop: '10vh',
-    marginRight: '-0.8vh',
     overflowY: 'auto',
     overflowX: 'hidden',
-    WebkitOverflowScrolling: 'touch'
+    WebkitOverflowScrolling: 'touch',
+    willChange: 'transform',
 }
 
 const liStyle = {

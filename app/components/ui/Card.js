@@ -5,12 +5,15 @@ import Image from "next/image";
 import chevron from '/public/icons/chevron.svg';
 
 const titleStyle = {
-    fontSize: '1.2em',
-    fontWeight: 'bold',
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    letterSpacing: '-0.01em',
 }
 const contentStyle = {
-    fontSize: '1.1em',
-    color: '#dddddd',
+    fontSize: '0.95rem',
+    color: 'var(--text-secondary)',
+    lineHeight: '1.5',
+    marginTop: '0.25rem',
 }
 
 /** Card - Modular display of information
@@ -24,13 +27,17 @@ export default function Card({ children, headerTitle, headerContent, minimizeabl
     return(
         <div className={`card ${max ? '' : 'minimized'}`} style={{...style}}>
             <MinimizeButton minimizeable={minimizeable} max={max} setMax={setMax} />
-            {headerTitle ? 
+            {headerTitle ?
                 <div className={styles.cardHeader}>
                     <div style={titleStyle}>{headerTitle}</div>
-                    <div>{headerContent}</div>
+                    <div style={contentStyle}>{headerContent}</div>
                 </div>
              : <></>}
-             <div style={{opacity: max ? '100%' : '0%'}}>
+             <div style={{
+                 opacity: max ? '1' : '0',
+                 visibility: max ? 'visible' : 'hidden',
+                 transition: 'opacity 0.2s ease, visibility 0.2s ease'
+             }}>
                 {children}
              </div>
         </div>

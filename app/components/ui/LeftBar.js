@@ -4,21 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link'
 
 const style = {
-    position: 'absolute',
-    zIndex: '10',
+    position: 'fixed',
+    top: '10vh',
+    left: 0,
+    zIndex: 150,
     borderRight: '1px solid',
-    borderTop: '1px solid',
     background: '#222222',
     borderColor: '#333333',
     width: '15vw',
     height: 'calc(100vh - 10vh)',
-    minHeight: '-webkit-fill-available',
+    maxHeight: 'calc(100vh - 10vh)',
     display: "flex",
     flexDirection: "column",
     gap: '2vh',
-    marginTop: '10vh',
-    marginLeft: '-0.8vh',
     overflow: 'hidden',
+    willChange: 'transform',
 }
 
 const liStyle = {
@@ -49,17 +49,25 @@ export default function LeftBar(props){
             left: false
         })
     }
+    let handleLinkClick = () => {
+        if(props.isMobile){
+            props.setNavStatus({
+                ...props.navStatus,
+                left: false
+            })
+        }
+    }
     return(
-        <div 
+        <div
             style={{...style, width: props.isMobile ? '100%' : '15vw'}}
             className={props.navStatus.left ? styles.slideIn : styles.slideOutLeft}
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
-            <Link href={'/'} style={{WebkitTapHighlightColor: 'transparent'}}><div style={liStyle}>Home</div></Link>
+            <Link href={'/'} onClick={handleLinkClick} style={{WebkitTapHighlightColor: 'transparent'}}><div style={liStyle}>Home</div></Link>
             {props.directory.map((obj, ind)=>{
                 return(
-                    <Link href={obj.route} key={ind} style={{WebkitTapHighlightColor: 'transparent'}}><div style={{...liStyle, maxWidth: props.isMobile ? '100%' : '15vw'}}> {obj.name}</div></Link>
+                    <Link href={obj.route} key={ind} onClick={handleLinkClick} style={{WebkitTapHighlightColor: 'transparent'}}><div style={{...liStyle, maxWidth: props.isMobile ? '100%' : '15vw'}}> {obj.name}</div></Link>
                 )
             })}
         </div>

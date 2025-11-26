@@ -28,8 +28,33 @@ export default function Wrapper({ children, isMobile, pageTitle, pageDescription
         left: false,
         right: false,
     })
+
+    const handleOverlayClick = () => {
+        if(isMobile && (navStatus.left || navStatus.right)){
+            setNavStatus({
+                left: false,
+                right: false
+            })
+        }
+    }
+
     return (
-        <span style={{overflowX: 'hidden', position: isMobile ? 'relative' : 'inherit'}}>
+        <div style={{overflowX: 'hidden', position: 'relative', width: '100%', minHeight: '100vh'}}>
+            {isMobile && (navStatus.left || navStatus.right) && (
+                <div
+                    onClick={handleOverlayClick}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 25,
+                        cursor: 'pointer'
+                    }}
+                />
+            )}
             <TopBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageTitle={pageTitle} />
             <LeftBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} directory={DIRECTORY} />
             <RightBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile} pageDescription={pageDescription} />
@@ -37,6 +62,6 @@ export default function Wrapper({ children, isMobile, pageTitle, pageDescription
                 {children}
             </div>
             <BottomBar navStatus={navStatus} setNavStatus={setNavStatus} isMobile={isMobile}/>
-        </span>
+        </div>
     );
   };

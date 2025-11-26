@@ -4,19 +4,25 @@ import { useState } from "react"
 
 const style = {
     position: 'absolute',
-    borderBottom: '1px solid #333333',
-    borderColor: '#333333',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     width: '100%',
-    height: '10vh',
+    minHeight: '10vh',
+    background: '#222222',
+    zIndex: 100,
+    paddingBottom: 'var(--spacing-2)',
 }
 
 const innerStyle = {
     width: '95%',
     margin: 'auto',
-    marginTop: '2vh',
+    paddingTop: 'var(--spacing-3)',
     display: 'flex',
-    flexFlow: 'row',
+    flexFlow: 'row nowrap',
     justifyContent: 'space-between',
+    alignItems: 'center',
 }
 
 /** Top Navigation Bar
@@ -31,7 +37,7 @@ export default function TopBar(props){
         <div style={style}>
             <div style={innerStyle}>
                 <NavMenuIconLeft navStatus={props.navStatus} setNavStatus={props.setNavStatus} isMobile={props.isMobile} />
-                {props.pageTitle ? <div style={{fontSize: '2em'}}>{props.pageTitle}</div> : <div></div>}
+                {props.pageTitle ? <div style={{fontSize: '2em', textAlign: 'center', flex: '1'}}>{props.pageTitle}</div> : <div style={{flex: '1'}}></div>}
                 <NavMenuIconRight navStatus={props.navStatus} setNavStatus={props.setNavStatus} isMobile={props.isMobile} />
             </div>
         </div>
@@ -53,7 +59,9 @@ function NavMenuIconLeft(props){
     let handleTouchEnd = () => {
         setTouch(false);
     }
-    let handleClick = () => {
+    let handleClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         props.setNavStatus({
             ...props.navStatus,
             left: !props.navStatus.left
@@ -64,10 +72,12 @@ function NavMenuIconLeft(props){
                 cursor: 'pointer',
                 fontSize:'2.5em',
                 transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
-                marginTop: '-1.5vh',
                 userSelect: 'none',
                 transition: 'transform 0.2s ease',
                 WebkitTapHighlightColor: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                flexShrink: 0,
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -95,21 +105,25 @@ function NavMenuIconRight(props){
     let handleTouchEnd = () => {
         setTouch(false);
     }
-    let handleClick = () => {
+    let handleClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         props.setNavStatus({
             ...props.navStatus,
             right: !props.navStatus.right
         })
     }
     return(
-        <span style={{
+        <div style={{
                 cursor: 'pointer',
                 fontSize:'2.5em',
                 transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
-                marginTop: '-1.5vh',
                 userSelect: 'none',
                 transition: 'transform 0.2s ease',
                 WebkitTapHighlightColor: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                flexShrink: 0,
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
