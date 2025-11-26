@@ -71,13 +71,16 @@ function NavMenuIconLeft(props){
         <div style={{
                 cursor: 'pointer',
                 fontSize:'2.5em',
-                transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
                 userSelect: 'none',
-                transition: 'transform 0.2s ease',
+                transition: 'box-shadow 0.3s ease, color 0.2s ease',
                 WebkitTapHighlightColor: 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 flexShrink: 0,
+                padding: '0.2em 0.3em',
+                borderRadius: 'var(--border-radius-sm)',
+                boxShadow: (hover || touch) ? '-3px 0 0 0 var(--accent-primary)' : 'none',
+                color: (hover || touch) ? 'var(--foreground)' : 'var(--text-primary)',
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -117,13 +120,16 @@ function NavMenuIconRight(props){
         <div style={{
                 cursor: 'pointer',
                 fontSize:'2.5em',
-                transform: (hover || touch) ? 'scale(1.3)' : 'scale(1)',
                 userSelect: 'none',
-                transition: 'transform 0.2s ease',
+                transition: 'box-shadow 0.3s ease, color 0.2s ease',
                 WebkitTapHighlightColor: 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 flexShrink: 0,
+                padding: '0.2em 0.3em',
+                borderRadius: 'var(--border-radius-sm)',
+                boxShadow: (hover || touch) ? '3px 0 0 0 var(--accent-primary)' : 'none',
+                color: (hover || touch) ? 'var(--foreground)' : 'var(--text-primary)',
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

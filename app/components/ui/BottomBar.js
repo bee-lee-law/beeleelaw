@@ -8,17 +8,15 @@ import instaMark from '/public/icons/Instagram_Glyph_Black.svg';
 
 
 const style = {
-    //position: 'absolute',
-    borderTop: '1px solid #333333',
-    borderColor: '#333333',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
     width: '100%',
-    //height: '10vh',
+    paddingBottom: 'var(--spacing-4)',
 }
 
 const innerStyle = {
     width: '75%',
     margin: 'auto',
-    marginTop: '3vh',
+    marginTop: 'var(--spacing-4)',
     display: 'flex',
     flexFlow: 'row',
     justifyContent: 'space-between',

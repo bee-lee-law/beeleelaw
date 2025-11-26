@@ -5,30 +5,44 @@ import Card from "./Card";
 
 const style = {
     position: 'fixed',
-    top: '10vh',
+    top: 0,
     right: 0,
     zIndex: 150,
-    borderLeft: '1px solid',
-    background: '#222222',
-    borderColor: '#333333',
+    borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'var(--background)',
     width: '50vw',
-    height: 'calc(100vh - 10vh)',
-    maxHeight: 'calc(100vh - 10vh)',
+    height: '100vh',
     display: "flex",
     flexDirection: "column",
-    gap: '2vh',
+    paddingTop: 'var(--spacing-3)',
     overflowY: 'auto',
     overflowX: 'hidden',
     WebkitOverflowScrolling: 'touch',
     willChange: 'transform',
 }
 
-const liStyle = {
-    marginTop: '4vh',
-    background: '#222222',
-    width: '80%',
-    height: 'auto',
-    marginLeft: '4vw'
+const headerStyle = {
+    width: '100%',
+    padding: 'var(--spacing-4)',
+    background: 'rgba(255, 255, 255, 0.02)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    textAlign: 'center',
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    fontFamily: 'var(--font-geist-sans)',
+    letterSpacing: '-0.01em',
+}
+
+const contentStyle = {
+    padding: 'var(--spacing-4)',
+    paddingLeft: 'var(--spacing-4)',
+    paddingRight: 'var(--spacing-4)',
+    background: 'transparent',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--spacing-3)',
+    boxSizing: 'border-box',
 }
 
 const testData = [
@@ -43,6 +57,38 @@ const testData = [
  * @param {boolean} isMobile - true if page is viewed from mobile device, else false
  * @param {JSX.Element[]} pageDescription - Array of JSX.Elements describing the project of the given page
 */
+function CloseButton({ onClick }) {
+    const [hover, setHover] = useState(false);
+
+    const buttonStyle = {
+        position: 'absolute',
+        top: 'var(--spacing-2)',
+        left: 'var(--spacing-2)',
+        cursor: 'pointer',
+        fontSize: '1.5rem',
+        padding: '0.3em 0.4em',
+        borderRadius: 'var(--border-radius-sm)',
+        transition: 'all 0.2s ease',
+        background: hover ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
+        color: hover ? 'var(--foreground)' : 'var(--text-secondary)',
+        userSelect: 'none',
+        WebkitTapHighlightColor: 'transparent',
+        lineHeight: 1,
+        zIndex: 20,
+    };
+
+    return (
+        <div
+            style={buttonStyle}
+            onClick={onClick}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
+            ×
+        </div>
+    );
+}
+
 export default function RightBar(props){
     var pageDescription = props.pageDescription ? props.pageDescription : testData;
     let handleMouseEnter = () => {
@@ -57,19 +103,30 @@ export default function RightBar(props){
             right: false
         })
     }
+    let handleClose = () => {
+        props.setNavStatus({
+            ...props.navStatus,
+            right: false
+        })
+    }
     return(
-        <div 
+        <div
             style={{...style, width: props.isMobile ? '100%' : '50vw'}}
             className={props.navStatus.right ? styles.slideIn : styles.slideOutRight}
             onMouseEnter={props.isMobile ? null : handleMouseEnter}
             onMouseLeave={props.isMobile ? null : handleMouseLeave}
         >
-            <div className={styles.cardHeader} style={{width: '100%', height: '1.2em', background: '#333333', textAlign: 'center', fontSize: '2em'}}>About</div>
-            {pageDescription.map((data, index)=>{
-                return(
-                    <div style={liStyle} key={index}>{data}</div>
-                )
-            })}
+            {props.isMobile && <CloseButton onClick={handleClose} />}
+            <div style={headerStyle}>About This Page</div>
+            <div style={contentStyle}>
+                {pageDescription.map((data, index)=>{
+                    return(
+                        <Card key={index} minimizeable={false} style={{maxWidth: '100%', width: '100%'}}>
+                            {data}
+                        </Card>
+                    )
+                })}
+            </div>
         </div>
     )
 }

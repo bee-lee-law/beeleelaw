@@ -93,17 +93,19 @@ strong {
   min-width: 0;
   max-width: 95%;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--accent-secondary);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-4);
   overflow: hidden;
   max-height: 500em;
   box-shadow: var(--shadow-md);
   background: rgba(255, 255, 255, 0.02);
-  transition: max-height 0.3s ease-in-out, box-shadow 0.3s ease;
+  transition: max-height 0.3s ease-in-out, box-shadow 0.3s ease, border-left-color 0.3s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-lg);
+  border-left-color: var(--accent-hover);
 }
 
 .card.minimized {
