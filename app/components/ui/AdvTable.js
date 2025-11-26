@@ -63,35 +63,32 @@ export default function AdvTable(props){
             }   
             else{console.log('operator ' + filter.op + ' not found');}     
         }
+        if(sort){
+            let mod = 1;
+            let sorter = sort;
+            if(!sort || sort == ''){
+                return newData;
+            }
+            if(sorter[0] == '!'){
+                sorter = sorter.substring(1, sorter.length);
+                mod = -1;
+            }
+            return newData.sort((a, b)=>{
+                if(a[sorter] < b[sorter] || !b[sorter]){return 1*mod;}
+                if(a[sorter] > b[sorter] || !a[sorter]){return -1*mod;}
+                return 0;
+            });
+        }
         return newData;
-    }
-    const sortData = (col) => {
-        let sorter = col;
-        let mod = 1;
-        if(!col || col == ''){
-            return;
-        }
-        if(sorter[0] == '!'){
-            sorter = sorter.substring(1, sorter.length);
-            mod = -1;
-        }
-        setActiveData(activeData.sort((a, b)=>{
-            if(a[sorter] < b[sorter] || !b[sorter]){return 1*mod;}
-            if(a[sorter] > b[sorter] || !a[sorter]){return -1*mod;}
-            return 0;
-        }))
     }
 
 
     useEffect( () => {
         if(toRoll){
             setActiveData(rollFilters());
-            if(sort){
-                sortData(sort);
-            }
             setToRoll(false);
         }
-    }, [toRoll]); 
+    }, [toRoll, activeData]); 
 
     if(schema.error){
         return(
