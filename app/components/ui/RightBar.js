@@ -121,9 +121,9 @@ export default function RightBar(props){
             <div style={contentStyle}>
                 {pageDescription.map((data, index)=>{
                     return(
-                        <Card key={index} minimizeable={false} style={{maxWidth: '100%', width: '100%'}}>
+                        <p key={index} style={{maxWidth: '100%', width: '100%'}}>
                             {data}
-                        </Card>
+                        </p>
                     )
                 })}
             </div>
